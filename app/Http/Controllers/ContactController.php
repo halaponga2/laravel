@@ -8,6 +8,6 @@ class ContactController extends Controller
 {
     public function index(){
         $name =['Address' => 'Большая Семёновская', 'Phone' => '88005553535', 'Email'=>'test@test.com'];
-        return view('contact', ['name'=>$name]);
+        return view('about', ['name'=>$name]);
     }
 }

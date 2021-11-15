@@ -16,9 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/main', [ArticleController::class, 'index']);
-Route::get('/contact', [ContactController::class,'index']);
-Route::get('/article', function () {
-    return view('article');
+Route::get('/', function(){
+    return view('main');
 });
-Route::post('/article', [ArticleController::class, 'create']);
+Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/about', [ContactController::class,'index']);
+
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->where('id', '[0-9]+');
+Route::get('/articles/create', function(){
+    return view('articles.create');
+});
+Route::post('/articles', [ArticleController::class, 'store']);
