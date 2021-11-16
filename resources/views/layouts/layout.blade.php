@@ -20,8 +20,8 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" href="/project2/example-app/public/">Главная</a>
-                        <a class="nav-link" href="articles">Статьи</a>
-                        <a class="nav-link" href="about">О нас</a>
+                        <a class="nav-link" href="/project2/example-app/public/articles">Статьи</a>
+                        <a class="nav-link" href="/project2/example-app/public/about">О нас</a>
                     </div>
                 </div>
             </div>
