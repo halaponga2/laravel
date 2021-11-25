@@ -22,6 +22,14 @@
                         <a class="nav-link" href="/project2/example-app/public/">Главная</a>
                         <a class="nav-link" href="/project2/example-app/public/articles">Статьи</a>
                         <a class="nav-link" href="/project2/example-app/public/about">О нас</a>
+                        <div class='d-flex justify-content-end'>
+                        @if (Auth::guest())
+                            <a class="nav-link" href="registration">Регистрация</a>
+                            <a class="nav-link" href="login">Вход</a>
+                            @else
+                            <a class="nav-link" href="logout">Выход</a>
+                        @endif
+                        </div>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Models\Article;
 use App\Models\ArticleComment;
@@ -32,3 +33,10 @@ Route::get('/articles/{id}', [ArticleController::class, 'show']);
 
 Route::post('/articles/{id}/comments', [ArticleCommentController::class, 'store']);
 Route::post('/articles', [ArticleController::class, 'store']);
+
+Route::get('/registration', [AuthController::class, 'index']);
+Route::post('/customRegistration', [AuthController::class, 'customRegistration']);
+
+Route::get('/login', [AuthController::class, 'login'])->name('login'); 
+Route::post('/customLogin', [AuthController::class, 'customLogin']);
+Route::get('/logout', [AuthController::class, 'signOut']);
