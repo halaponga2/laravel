@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\ArticleComment;
 
 class ArticleController extends Controller
 {
    public function index(){
-       $article= Article::all();
+    //    $article= Article::all();
+        $article= Article::paginate(5);
     //    $article= Article::orderBy('name')->get();
         // $article= Article::where('name', 'Ivan')->get();
         // $article= Article::latest()->get();
@@ -17,8 +19,9 @@ class ArticleController extends Controller
    
 
    public function show($id){
-        $article= Article::findOrFail($id);
-        return view('articles.view', ['article'=>$article]);
+        $article = Article::findOrFail($id);
+        $comments = ArticleComment::where('article_id', $id)->paginate(3); 
+        return view('articles.view', ['article'=>$article, 'comments'=>$comments]);
    }
 
     public function store(){

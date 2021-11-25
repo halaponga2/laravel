@@ -9,24 +9,23 @@
             <i>{{$article->data_create}}</i>
         </div>  
     </div>      
-    @if (!$article->comments->isEmpty())
+    @if (!$comments->isEmpty())
         <h3>Комментарии</h3>    
     @endif
     
-    @foreach($article->comments as $comment)
+    @foreach($comments as $comment)
     <div class="d-inline-flex p-2">
         <div class="card" style="width: 18rem;">
             <div class="card-header">
                 <h5 class="card-title">{{$comment->title}}</h5>
             </div>
             <div class="card-body">
-                
                 <p class="card-text">{{$comment->comment}}</p>
             </div>
         </div>
     </div>
     @endforeach
-
+    <div> {{$comments->links()}} </div>
 
 
     <form action="../articles/{{$article->id}}/comments" method="post" class="col-md-4 col-sm-12">
