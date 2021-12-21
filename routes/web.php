@@ -22,21 +22,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function(){
     return view('main');
 });
-Route::get('/articles', [ArticleController::class, 'index']);
-Route::get('/about', [ContactController::class,'index']);
-
-// Route::get('/articles/{id}', [ArticleController::class, 'show'])->where('id', '[0-9]+');
-Route::get('/articles/create', function(){
-    return view('articles.create');
+Route::group(['prefix'=>'/articles', 'middleware'=>'auth'], function(){
+    Route::get('', [ArticleController::class, 'index']);
+    Route::get('/create', [ArticleController::class, 'create']);
+    Route::get('/{id}', [ArticleController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [ArticleController::class, 'update']);
+    Route::get('/{id}/delete', [ArticleController::class, 'destroy']);
+    Route::post('/{id}/edit', [ArticleController::class, 'store']);
+    Route::post('', [ArticleController::class, 'store']);
 });
-Route::get('/articles/{id}', [ArticleController::class, 'show']);
 
-Route::post('/articles/{id}/comments', [ArticleCommentController::class, 'store']);
-Route::post('/articles', [ArticleController::class, 'store']);
+Route::group(['prefix'=>'/comment', 'middleware'=>'auth'], function(){
+    Route::get('',[ArticleCommentController::class, 'index'])->name('index');
+    Route::get('/{id}/accept', [ArticleCommentController::class, 'accept']);
+    Route::post('/{id}/create', [ArticleCommentController::class, 'store']);
+    Route::get('/{id}/delete', [ArticleCommentController::class, 'destroy']);
+});
+
+Route::get('/about', [ContactController::class,'index']);
 
 Route::get('/registration', [AuthController::class, 'index']);
 Route::post('/customRegistration', [AuthController::class, 'customRegistration']);
-
 Route::get('/login', [AuthController::class, 'login'])->name('login'); 
 Route::post('/customLogin', [AuthController::class, 'customLogin']);
 Route::get('/logout', [AuthController::class, 'signOut']);

@@ -19,15 +19,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="/project2/example-app/public/">Главная</a>
-                        <a class="nav-link" href="/project2/example-app/public/articles">Статьи</a>
-                        <a class="nav-link" href="/project2/example-app/public/about">О нас</a>
+                        <a class="nav-link @linkactive('/')" href="/project2/example-app/public/">Главная</a>
+                        <a class="nav-link @linkactive('articles') " href="/project2/example-app/public/articles">Статьи</a>
+                        @can('moderator')
+                        <a class="nav-link @linkactive('articles/create')"  href="/project2/example-app/public/articles/create">Создать</a>
+                        @yield('comment')
+                        <a class="nav-link @linkactive('comment')"  href="/project2/example-app/public/comment">Комментарии</a>
+                        @endcan
+                        <a class="nav-link @linkactive('about')" href="/project2/example-app/public/about">О нас</a>
                         <div class='d-flex justify-content-end'>
                         @if (Auth::guest())
-                            <a class="nav-link" href="registration">Регистрация</a>
-                            <a class="nav-link" href="login">Вход</a>
+                            <a class="nav-link @linkactive('registration')" href="/project2/example-app/public/registration">Регистрация</a>
+                            <a class="nav-link" href="/project2/example-app/public/login">Вход</a>
                             @else
-                            <a class="nav-link" href="logout">Выход</a>
+                            <a class="nav-link" href="/project2/example-app/public/logout">Выход</a>
                         @endif
                         </div>
                     </div>

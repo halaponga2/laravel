@@ -1,4 +1,8 @@
 @extends('layouts.layout')
+@section('comment')
+    <a href="/project2/example-app/public/articles/{{$article->id}}/edit" class="nav-link active">Редактировать</a>
+    <a href="/project2/example-app/public/articles/{{$article->id}}/delete" class="nav-link active">Удалить</a>
+@endsection
 @section('content')
     <div class="card mt-5 mb-5">
         <div class="card-body">
@@ -8,7 +12,8 @@
             <p>{{$article->name}}<p>
             <i>{{$article->data_create}}</i>
         </div>  
-    </div>      
+    </div>
+
     @if (!$comments->isEmpty())
         <h3>Комментарии</h3>    
     @endif
@@ -25,10 +30,14 @@
         </div>
     </div>
     @endforeach
-    <div> {{$comments->links()}} </div>
+    <div> {{ $comments->links() }}</div>
 
-
-    <form action="../articles/{{$article->id}}/comments" method="post" class="col-md-4 col-sm-12">
+    @isset($_GET['result'])
+        @if ($_GET['result'] == 1)
+            <b>Ваш комментарий на модерации</b>
+        @endif
+    @endisset
+    <form action="../comment/{{$article->id}}/create" method="post" class="col-md-4 col-sm-12">
         @csrf 
         <h3>Добавить комментарий</h3>
         <div class="form-group">
