@@ -50,4 +50,9 @@
         </div>
         <button type="submit" class="btn btn-primary mt-3">Отправить</button>
     </form>
+    <div id="app">
+        <example-component>
+            
+        </example-component>
+    </div>
 @endsection
